@@ -8,12 +8,12 @@ void state0() {
 
     while(unpressed) {
         // Up Button
-        if (buttons[0].pressed) {
+        if (buttons[UP].pressed) {
             state = 1;
             unpressed = 0;
         }
-        // Down Button
-        if (buttons[1].pressed) {
+        // Enter Button
+        if (buttons[ENTER].pressed) {
             state = 7;
             unpressed = 0;
         }

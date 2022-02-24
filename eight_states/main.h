@@ -28,6 +28,8 @@ Final correct button press will blink all three LEDs
 #include "state7.h"
 
 /* Put your global variables here */
+#define UP 0
+#define ENTER 1
 // state contains the current state of the FSM
 extern int state;
 

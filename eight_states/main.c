@@ -9,14 +9,6 @@ int LED_bit0 = 4;
 int LED_bit1 = 3;
 int LED_bit2 = 2;
 
-// int buttonState0;
-// int BUTTON0 = 8;
-// int priorState0 = 0;
-
-// int buttonState1;
-// int BUTTON1 = 9;
-// int priorState1 = 0;
-
 /* Main */ 
 int main() {
 
@@ -24,24 +16,18 @@ int main() {
    pinMode(LED_bit0, OUTPUT);
    pinMode(LED_bit1, OUTPUT);
    pinMode(LED_bit2, OUTPUT);
-   // pinMode(BUTTON0, INPUT_PULLUP);
-   // pinMode(BUTTON1, INPUT_PULLUP);
 
-   uint8_t i = 0;
-   buttons[i].uno = 8;
-   pinMode(buttons[i].uno, INPUT_PULLUP);
-   ++i;
-   buttons[i].uno = 9;
-   pinMode(buttons[i].uno, INPUT_PULLUP);
+   buttons[UP].uno = 10;
+   pinMode(buttons[UP].uno, INPUT_PULLUP);
+   buttons[ENTER].uno = 9;
+   pinMode(buttons[ENTER].uno, INPUT_PULLUP);
 
    init_sysclock_2 ();
 
 // while(1) loop routine runs over and over again forever:
     while(1) {
         /* execution code goes here */
-        delay(5);
-        // buttonState0 = buttons[0].pressed;
-        // buttonState1 = buttons[1].pressed;
+        delay(50);
         printf("Entering Switch, state = %d\n", state);
         switch (state)
         {

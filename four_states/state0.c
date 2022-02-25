@@ -3,7 +3,6 @@
 void state0() {
     digitalWrite(LED_bit0, LOW);
     digitalWrite(LED_bit1, LOW);
-    digitalWrite(LED_bit2, LOW);
     uint8_t unpressed = 1;
 
     while(unpressed) {
@@ -14,7 +13,7 @@ void state0() {
         }
         // Enter Button
         if (buttons[ENTER].pressed) {
-            state = 7;
+            state = 0;
             unpressed = 0;
         }
     }

@@ -16,7 +16,6 @@
 #include <avr/sleep.h>
 
 uint16_t millis();
-uint16_t micros();
 
 /* Timer/Clock Scalar definitions
 *	format SCALARn_s where:
@@ -34,14 +33,10 @@ uint16_t micros();
 #ifndef SCALAR2
 #define SCALAR2 SCALAR02_8
 #endif
-#ifndef SET_OCR1A
-#define SET_OCR1A 128
-#endif
 
 #define RESET_MASK  0b11000111
 
 void init_sysclock_0 (void);
-void init_sysclock_1 (void);
 void init_sysclock_2 (void);
 
 uint8_t is_RESET_pressed();

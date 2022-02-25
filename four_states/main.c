@@ -5,9 +5,8 @@
 // state contains the current state of the FSM
 int state = 0;
 
-int LED_bit0 = 4;
-int LED_bit1 = 3;
-int LED_bit2 = 2;
+int LED_bit0 = 8;
+int LED_bit1 = 7;
 
 /* Main */ 
 int main() {
@@ -15,11 +14,10 @@ int main() {
    init_serial();
    pinMode(LED_bit0, OUTPUT);
    pinMode(LED_bit1, OUTPUT);
-   pinMode(LED_bit2, OUTPUT);
 
-   buttons[UP].uno = 10;
+   buttons[UP].uno = 4;
    pinMode(buttons[UP].uno, INPUT_PULLUP);
-   buttons[ENTER].uno = 9;
+   buttons[ENTER].uno = 12;
    pinMode(buttons[ENTER].uno, INPUT_PULLUP);
 
    init_sysclock_2 ();
@@ -53,30 +51,6 @@ int main() {
              // Audible State
                 puts("state3");
                 state3();
-                break;
-             ;
-             case 4:
-             // Audible State
-                puts("state4");
-                state4();
-                break;
-             ;
-             case 5:
-             // Audible State
-                puts("state5");
-                state5();
-                break;
-             ;
-             case 6:
-             // Audible State
-                puts("state6");
-                state6();
-                break;
-             ;
-             case 7:
-             // Audible State
-                puts("state7");
-                state7();
                 break;
              ;
              default:

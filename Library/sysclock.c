@@ -6,7 +6,6 @@
 
 
 volatile uint16_t sys_ctr_0 = 0;
-volatile uint16_t sys_ctr_1 = 0;
 volatile uint16_t sys_ctr_2 = 0;
 volatile uint16_t ctr_copy = 0;
 
@@ -19,15 +18,6 @@ ISR (TIMER0_COMPA_vect)
 {
     sys_ctr_0++;
     PIND |= _BV(PD2);
-}
-
-/* ISR for sysclock_1
-* 15ms of the delay is due to the button press checking in the ISR
-* if button presses aren't required, comment out the code
-*/
-ISR (TIMER1_OVF_vect)      
-{
-    sys_ctr_1++;
 }
 
 /* ISR for sysclock_2
@@ -46,14 +36,6 @@ ISR (TIMER2_COMPA_vect)
         buttons[i].pressed = is_button_pressed(i);
     }
 
-}
-
-uint16_t micros() {
-    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-    {
-    ctr_copy = TCNT1;
-    }
-    return(ctr_copy);
 }
 
 uint16_t millis() {
@@ -79,24 +61,6 @@ void init_sysclock_0 (void)
     DDRD |= (_BV(PD2) | _BV(PD6));
 
     sei ();
-}
-
-void init_sysclock_1 (void)          
-{
-    /* Initialize timer 2
-    * TCCR1A [ COM1A1 COM1A0 COM1B1 COM1B0 0 0 WGM11 WGM10 ] = 00000000
-    * WGM13 WGM12 WGM11 WGM10 => Normal, TOP = 0xFFFF
-    * TCCR2B [ ICNC1 ICES1 0 WGM13 CS12 CS12 CS11 CS10 ]
-    * CS11 => scalar of 8
-    * Frequency = 16 x 10^6 / 1 / 40 = 50kHz
-    * -1 to account for overhead = 39
-    * Counter performs another divide by 2 => 25kHz
-    * Test using example/millis (delay(1000) = 40527 ticks)
-    */
-    TCCR1A = 0;
-    TCCR1B |= ( _BV(CS11));
-    TIMSK1 |= (_BV(TOIE1));
-    sei();
 }
 
 void init_sysclock_2 (void)          

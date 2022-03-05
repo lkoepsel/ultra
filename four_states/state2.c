@@ -16,7 +16,7 @@ void state2() {
             printf("In Enter State 2, state = %d\n", state);
 
             blue_led(MEDIUM);
-            ultra_low(DC_50);
+            sound(FREQ_40K);
         }
     }
     // Turn off pins and reset Timer 1 each time a new state

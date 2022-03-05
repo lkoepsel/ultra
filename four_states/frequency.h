@@ -6,8 +6,8 @@
 
 #include "main.h"
 
-void audible(uint8_t duty_cycle) ;
-void ultra_low(uint8_t duty_cycle) ;
-void ultra_high(uint8_t duty_cycle) ;
 void blue_led(uint8_t intensity);
+void sound(uint16_t freq) ;
+void ultra_low(uint16_t freq) ;
+// void ultra_high(uint16_t duty_cycle) ;
 #endif

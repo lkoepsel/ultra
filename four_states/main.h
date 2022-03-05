@@ -29,6 +29,15 @@ Final correct button press will blink all three LEDs
 #define DIM 16
 #define MEDIUM 63
 #define BRIGHT 127
+
+#define DC_10 25
+#define DC_25 64
+#define DC_33 85
+#define DC_50 127
+#define DC_66 170
+#define DC_75 191
+#define DC_95 242
+
 // state contains the current state of the FSM
 extern int state;
 

@@ -5,6 +5,7 @@
 #define STATE1_H
 
 #include "main.h"
+#include "frequency.h"
 
 void state1() ;
 #endif

@@ -22,6 +22,7 @@ Final correct button press will blink all three LEDs
 #include "state1.h"
 #include "state2.h"
 #include "state3.h"
+#include "freqs.h"
 
 /* Put your global variables here */
 #define UP 0
@@ -32,15 +33,15 @@ Final correct button press will blink all three LEDs
 
 // Frequencies are defined by 16x10^6/ (2 * scalar * TOP), scalar = 1 and TOP,
 // for which the definitions are below
-#define FREQ_2K 2000
-#define FREQ_4K 1000
-#define FREQ_8K 500
-#define FREQ_16K 249
-#define FREQ_20K 200
-#define FREQ_28K 143
-#define FREQ_32K 125
-#define FREQ_40K 101
-#define FREQ_48K 83
+// #define FREQ_2K 2000
+// #define FREQ_4K 1000
+// #define FREQ_8K 500
+// #define FREQ_16K 249
+// #define FREQ_20K 200
+// #define FREQ_28K 143
+// #define FREQ_32K 125
+// #define FREQ_40K 101
+// #define FREQ_48K 83
 
 
 // state contains the current state of the FSM

@@ -30,31 +30,3 @@ void sound(uint16_t freq) {
     OCR1A = freq;
 return;
 }	
-
-// void ultra_low(uint16_t freq) {
-//     // Speaker, Low Ultrasonic
-//     // set UNO pin 10/PB2 to output, 32.2kHz, 50% duty cycle
-//     DDRB |=  _BV(DDB1);
-    
-//     // TCCR1A [ COM1A1 COM1A0 COM1B1 COM1B0 0 0 WGM11 WGM10  ] = 00100010
-//     TCCR1A |= (_BV(COM1A0) | _BV(WGM10));
-
-//     // TCCR1B [ 1CNC1 1CES1 0 WGM13 WGM12 CS12 CS11 CS10 ]
-//     TCCR1B |= (_BV(WGM13) | _BV(CS10));
-
-//     OCR1A = freq;
-// }
-
-// void ultra_high(uint16_t freq) {
-//     // Speaker, High Ultrasonic
-//     // set UNO pin 10/PB2 to output, 62.4kHz, 50% duty cycle
-//     DDRB |=  _BV(DDB1);
-
-//     // TCCR1A [ COM1A1 COM1A0 COM1B1 COM1B0 0 0 WGM11 WGM10  ] = 00100001
-//     TCCR1A |= (_BV(COM1A0) | _BV(WGM10));
-
-//     // TCCR1B [ 1CNC1 1CES1 0 WGM13 WGM12 CS12 CS11 CS10 ]
-//     TCCR1B |= (_BV(WGM13) | _BV(CS10));
-
-//     OCR1A = freq;
-// }

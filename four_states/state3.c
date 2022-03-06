@@ -16,7 +16,7 @@ void state3() {
             printf("In Enter State 3, state = %d\n", state);
 
             blue_led(BRIGHT);
-            sound(FREQ_48K);
+            sound(FREQ_28K);
 
         }
     }

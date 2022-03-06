@@ -16,7 +16,8 @@ void state3() {
             printf("In Enter State 3, state = %d\n", state);
 
             blue_led(BRIGHT);
-            sound(FREQ_28K);
+            // hard-coded to frequency 28K for now
+            sound(143);
 
         }
     }

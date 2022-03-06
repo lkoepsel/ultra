@@ -22,7 +22,6 @@ Final correct button press will blink all three LEDs
 #include "state1.h"
 #include "state2.h"
 #include "state3.h"
-#include "freqs.h"
 
 /* Put your global variables here */
 #define UP 0

@@ -5,6 +5,7 @@
 #ifndef STATE1_H
 #define STATE1_H
 
+#include <stdbool.h>
 #include "main.h"
 #include "frequency.h"
 

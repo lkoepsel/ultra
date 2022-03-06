@@ -16,7 +16,15 @@ void state2() {
             printf("In Enter State 2, state = %d\n", state);
 
             blue_led(MEDIUM);
-            sound(FREQ_41K);
+            while (true) {
+                uint16_t rand_f = random() % 200;
+                if (rand_f >= 80) { 
+                    uint16_t rand_t = 500 + random() % 2000;
+                    printf("%u | %u ", rand_f, rand_t);
+                    sound(rand_f);
+                    delay(rand_t);
+                }
+            }
         }
     }
     // Turn off pins and reset Timer 1 each time a new state

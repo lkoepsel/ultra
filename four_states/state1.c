@@ -1,5 +1,4 @@
 #include "state1.h"
-#include "frequency.h"
 
 void state1() {
     digitalWrite(LED_bit0, HIGH);
@@ -17,8 +16,14 @@ void state1() {
             printf("In Enter State 1, state = %d\n", state);
 
             blue_led(DIM);
-            sound(FREQ_12K);
-
+            while (true) {
+                uint16_t rand_f = random() % 4000;
+                uint16_t rand_t = 500 + random() % 2000;
+                printf("%u | %u ", rand_f, rand_t);
+                sound(rand_f);
+                delay(rand_t);
+            }
+            printf("\n");
         }
     }
     // Turn off pins and reset Timer 1 each time a new state

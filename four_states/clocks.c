@@ -9,7 +9,7 @@ volatile uint8_t bounce_delay = BOUNCE_DIVIDER;
 extern button buttons[MAX_BUTTONS];
 
 // ISR for sysclock_2
-// Provides millis() counter and debouncing of buttons
+// Provides millis() counter and clock for debouncing of buttons()
 // Number of buttons to check will slightly increase execution time of millis()
 ISR (TIMER2_COMPA_vect)      
 {
@@ -38,16 +38,17 @@ uint16_t millis() {
 
 void blue_led(uint8_t intensity) {
 
-    // Uses T/C 0 to drive BLUE LED, indicates sound (audible/ultra 1/ultra 2)
-    // Blue LED Indicator, Dim
-    // set blue LED output, 975Hz, duty cycle based on (intensity)
+    // Uses T/C 0 to drive BLUE LED, indicates sound being output
+    // T/C 0: Fast PWM, Top = 0xFF, PD6, 1/64 prescalar => 976.6Hz
+    // Blue LED Indicator, DIM, MED, BRIGHT
+    // set blue LED intensity, duty cycle based on (intensity)
     DDRD |=  _BV(LED_BLUE);
     
-    // TCCR0A [ COM0A1 COM0A0 COM0B1 COM0B0 0 0 WGM21 WGM20 ] = 11000010
-    TCCR0A |= (_BV(COM0A1) | _BV(WGM21) | _BV(WGM20));
+    // TCCR0A [ COM0A1 COM0A0 COM0B1 COM0B0 0 0 WGM01 WGM00 ] = 11000010
+    TCCR0A |= (_BV(COM0A1) | _BV(WGM01) | _BV(WGM00));
 
-    // TCCR0B [ FOC2A FOC2B 0 0 WGM22 CS22 CS21 CS20 ]
-    TCCR0B |=  (_BV(CS21) | _BV(CS20));
+    // TCCR0B [ FOC0A FOC0B 0 0 WGM02 CS02 CS01 CS00 ] = 00000011
+    TCCR0B |=  (_BV(CS01) | _BV(CS00));
 
     OCR0A = intensity;
 return;

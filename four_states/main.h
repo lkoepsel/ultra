@@ -27,8 +27,8 @@ Final correct button press will blink all three LEDs
 #define UP 0
 #define ENTER 1
 #define DIM 16
-#define MEDIUM 63
-#define BRIGHT 127
+#define MEDIUM 127
+#define BRIGHT 255
 
 // state contains the current state of the FSM
 extern uint8_t state;

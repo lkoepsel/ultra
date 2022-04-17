@@ -10,13 +10,13 @@ void state0() {
         if (buttons[UP].pressed) {
             state = 1;
             unpressed = 0;
-            printf("UP");
+            printf("State0: Up pressed, state = %d\n", state);
         }
         // Enter Button
         if (buttons[ENTER].pressed) {
             state = 0;
             unpressed = 0;
-            printf("ENTER");
+            printf("In Enter State 0, state = %d\n", state);
         }
     }
     printf("Exiting State 0, state = %d\n", state);

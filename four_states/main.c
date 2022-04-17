@@ -31,10 +31,8 @@ int main() {
 
    init_sysclock_2 ();
 
-// while(1) loop routine runs over and over again forever:
     while(1) {
-        /* execution code goes here */
-        delay(50);
+        // delay(50);
         printf("Entering Switch, state = %d\n", state);
         switch (state)
         {

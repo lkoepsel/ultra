@@ -4,7 +4,7 @@
 * The three Timer/Counters are used in the following manner:
 * T/C 0 - drives BLUE LED, indicates sound (audible/ultra 1/ultra 2)
 * T/C 1 - drives speaker sound (audible/ultra 1/ultra 2)
-* T/C 2 - is a 1 millisecond timer which also provides a 10ms debounce clock
+* T/C 2 - is a 1 millisecond timer, millis() and a debounce clock
 */
 #ifndef clocks_h
 #define clocks_h

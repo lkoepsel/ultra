@@ -17,10 +17,12 @@ ISR (TIMER2_COMPA_vect)
 
     sys_ctr_2++;
 
-    //  X times divider for millis() otherwise buttons checked too often
+    //  BOUNCE_DIVIDER for millis() or buttons checked too often
     bounce_delay--;
-    if (bounce_delay == 0) {
-        for (uint8_t i=0; i < MAX_BUTTONS; i++) {
+    if (bounce_delay == 0) 
+    {
+        for (uint8_t i=0; i < MAX_BUTTONS; i++) 
+        {
             buttons[i].pressed = is_button_pressed(i);
         }
         bounce_delay = BOUNCE_DIVIDER;

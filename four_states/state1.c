@@ -1,23 +1,28 @@
 #include "state1.h"
 
-void state1() {
+void state1() 
+{
     digitalWrite(LED_BIT0, HIGH);
     digitalWrite(LED_BIT1, LOW);
     bool unpressed = true;
 
-    while(unpressed) {
+    while(unpressed) 
+    {
         // Up Button
-        if (buttons[UP].pressed) {
+        if (buttons[UP].pressed) 
+        {
             state = 2;
             unpressed = false;
             printf("State1: Up pressed, state = %d\n", state);
         }
         // Enter Button
-        if (buttons[ENTER].pressed) {
-            printf("In Enter State 1 pre, state = %d\n", state);
+        if (buttons[ENTER].pressed) 
+        {
+            printf("In Enter State 1, state = %d\n", state);
             unpressed = true;
             blue_led(DIM);
-            while (unpressed) {
+            while (unpressed) 
+            {
                 uint16_t rand_freq = random() % 4000;
                 uint16_t rand_time = 500 + random() % 2000;
                 printf("%u | %u ", rand_freq, rand_time);
@@ -28,23 +33,15 @@ void state1() {
                     if (buttons[UP].pressed) 
                     {
                         unpressed = false;
-                        printf("UP pressed");
+                        printf("UP pressed\n");
                         state = 2;
                     }
                 }
             }
-            printf("\n");
         }
     }
     // Turn off pins and reset Timer 1 each time a new state
     off();
-    // DDRB &= ~_BV(DDB2);
-    // DDRD &= ~_BV(DDD6);
-
-    // TCCR1A = 0;
-    // TCCR1B = 0;
-    // OCR1B = 0;
-
     printf("Exiting State 1, state = %d\n", state);
     return;
 }	

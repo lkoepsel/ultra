@@ -6,7 +6,6 @@
 
 volatile uint16_t sys_ctr_2 = 0;
 volatile uint8_t bounce_delay = BOUNCE_DIVIDER;
-
 extern button buttons[MAX_BUTTONS];
 
 // ISR for sysclock_2
@@ -41,7 +40,7 @@ void blue_led(uint8_t intensity) {
 
     // Uses T/C 0 to drive BLUE LED, indicates sound (audible/ultra 1/ultra 2)
     // Blue LED Indicator, Dim
-    // set blue LED output, 976.6Hz, duty cycle based on (intensity)
+    // set blue LED output, 975Hz, duty cycle based on (intensity)
     DDRD |=  _BV(LED_BLUE);
     
     // TCCR0A [ COM0A1 COM0A0 COM0B1 COM0B0 0 0 WGM21 WGM20 ] = 11000010
@@ -59,13 +58,19 @@ void sound(uint16_t freq)
         // Uses T/C 1 to drive speaker sound (audible/ultra 1/ultra 2)
         // Speaker, Audible Audio
         // set speaker to output, frequency based on (freq)
-        const uint8_t PIN = SPEAKER_PIN - 8; // Translate Uno pin to Port B
-        DDRB |=  _BV(PIN);
-        
+        // freq = 16000000 / (2 * prescalar * OCR1A) DSpage 137
+        // OC1A toggles at freq, effectively a divide by 2
+        // speaker freq = 16x10^6 / (2 * 1 * OCR1A * 2)
+        // Example frequencies: OCR1A = 4x10^6/frequency or 4000/freq in kHz
+        // 5kHz = 800
+        // 10kHz = 400
+        // 20kHz = 200
+        // 28kHz = 143
+        DDRB |=  _BV(SPEAKER_PIN - 8); // Translate Uno pin to Port B
+        // PWM, Phase and Frequency Correct, TOP=OCR1A, no prescalar
         // TCCR1A [ COM1A1 COM1A0 COM1B1 COM1B0 0 0 WGM11 WGM10  ] = 00100001
         TCCR1A |= (_BV(COM1A0) | _BV(WGM10));
-
-        // TCCR1B [ 1CNC1 1CES1 0 WGM13 WGM12 CS12 CS11 CS10 ]
+        // TCCR1B [ 1CNC1 1CES1 0 WGM13 WGM12 CS12 CS11 CS10 ] = 00010001
         TCCR1B |= (_BV(WGM13) | _BV(CS10));
 
         OCR1A = freq;
@@ -83,6 +88,7 @@ void init_sysclock_2 (void)
     * -1 to account for overhead = 254
     * Counter performs another divide by 2 => 1000hz
     * Test using example/millis (delay(1000) = 999 ticks)
+    * Manual adjustment to 251, most accurate comparison to delay(1000)
     */
     TCCR2A |= (_BV(WGM20));
     TCCR2B |= ( _BV(WGM22) | _BV(CS21) | _BV(CS20) ) ;
@@ -95,9 +101,9 @@ void off()
     {
         // Turn off pins and reset Timer 1 each time a new state
         DDRD &= ~_BV(LED_BLUE);
-        DDRD &= ~_BV(SPEAKER_PIN);
+        DDRB &= ~_BV(SPEAKER_PIN - 8); // Translate Uno pin to Port B
 
-        TCCR1A = 0;
-        TCCR1B = 0;
-        OCR1B = 0;
+        // TCCR1A = 0;
+        // TCCR1B = 0;
+        // OCR1B = 0;
     }

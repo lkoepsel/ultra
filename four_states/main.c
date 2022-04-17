@@ -32,37 +32,35 @@ int main() {
    init_sysclock_2 ();
 
     while(1) {
-        // delay(50);
-        printf("Entering Switch, state = %d\n", state);
+        printf("Switch, %d\n", state);
         switch (state)
         {
              case 0:
              // Power on State
-                puts("state0");
+                puts("case0");
                 state0();
                 break;
              ;
              case 1:
              // Audible State
-                puts("state1");
+                puts("case1");
                 state1();
                 break;
              ;
              case 2:
              // Audible State
-                puts("state2");
+                puts("case2");
                 state2();
                 break;
              ;
              case 3:
              // Audible State
-                puts("state3");
+                puts("case3");
                 state3();
                 break;
              ;
              default:
                puts("Default found");
-             //C Statements
              ;
         }
     }

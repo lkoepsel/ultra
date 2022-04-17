@@ -12,12 +12,12 @@ void state2()
         if (buttons[UP].pressed) {
             state = 3;
             unpressed = 0;
-            printf("State2: Up pressed, state = %d\n", state);
+            printf("2: Up, %d\n", state);
         }
         // Enter Button
         if (buttons[ENTER].pressed) 
         {
-            printf("In Enter State 2, state = %d\n", state);
+            printf("2: Enter, %d\n", state);
 
             blue_led(MEDIUM);
             while (unpressed) 
@@ -34,7 +34,7 @@ void state2()
                         if (buttons[UP].pressed) 
                         {
                             unpressed = false;
-                            printf("UP pressed\n");
+                            printf("UP\n");
                             state = 3;
                         }
                     }
@@ -44,6 +44,6 @@ void state2()
     }
     // Turn off pins and reset Timer 1 each time a new state
     off();
-    printf("Exiting State 2, state = %d\n", state);
+    printf("2: Exit, %d\n", state);
     return;
 }	

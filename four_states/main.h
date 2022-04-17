@@ -12,7 +12,7 @@ Final correct button press will blink all three LEDs
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "sysclock.h"
+#include "clocks.h"
 #include "button.h"
 #include "pinMode.h"
 #include "digitalRead.h"
@@ -44,21 +44,22 @@ Final correct button press will blink all three LEDs
 
 
 // state contains the current state of the FSM
-extern int state;
+extern uint8_t state;
 
-extern int LED_bit0;
-extern int LED_bit1;
-extern int LED_bit2;
+extern const uint8_t LED_BIT0;
+extern const uint8_t LED_BIT1;
+extern const uint8_t LED_BLUE;
+extern const uint8_t SPEAKER_PIN;
 
-extern int buttonState0;
-extern int BUTTON0;
-extern int priorState0;
+extern uint8_t buttonState0;
+extern uint8_t BUTTON0;
+extern uint8_t priorState0;
 
-extern int buttonState1;
-extern int BUTTON1;
-extern int priorState1;
+extern uint8_t buttonState1;
+extern uint8_t BUTTON1;
+extern uint8_t priorState1;
 
-extern button buttons[max_buttons];
+extern button buttons[MAX_BUTTONS];
 
 /* Main */ 
 int main();

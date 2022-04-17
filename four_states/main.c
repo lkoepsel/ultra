@@ -1,23 +1,32 @@
 #include "main.h"
 #include "uart.h"
 
-/* Put your global variables here */
-// state contains the current state of the FSM
-int state = 0;
+// All references are to Uno pin numbers
+// indicator LEDs and speaker, referenced to Port D
+const uint8_t LED_BIT0 = 3;
+const uint8_t LED_BIT1 = 5;
+const uint8_t LED_BLUE = 6;
 
-int LED_bit0 = 8;
-int LED_bit1 = 7;
+// button pins, are referenced to Uno pin numbers, also Port D
+const uint8_t UP_PIN = 2;
+const uint8_t ENTER_PIN = 4;
+
+// ultrasonic transducer, referenced by Uno pin number
+const uint8_t SPEAKER_PIN = 9;  // Note this is Port B, pin 1
+
+// state contains the current state of the FSM
+uint8_t state = 0;
 
 /* Main */ 
 int main() {
 
    init_serial();
-   pinMode(LED_bit0, OUTPUT);
-   pinMode(LED_bit1, OUTPUT);
+   pinMode(LED_BIT0, OUTPUT);
+   pinMode(LED_BIT1, OUTPUT);
 
-   buttons[UP].uno = 4;
+   buttons[UP].uno = UP_PIN;
    pinMode(buttons[UP].uno, INPUT_PULLUP);
-   buttons[ENTER].uno = 12;
+   buttons[ENTER].uno = ENTER_PIN;
    pinMode(buttons[ENTER].uno, INPUT_PULLUP);
 
    init_sysclock_2 ();

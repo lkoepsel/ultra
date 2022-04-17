@@ -44,8 +44,8 @@ CPPFLAGS = -DF_CPU=$(F_CPU) -DBAUD=$(BAUD) -DSOFT_RESET=$(SOFT_RESET) -I.  -I$(L
 # CPPFLAGS = -DF_CPU=$(F_CPU) -DBAUD=$(BAUD) -I.
 # use below to setup gdb and debugging
 CFLAGS = -Os -mcall-prologues -g3 -std=gnu99 -Wall -Werror -Wundef
-# Use below to optimize size and some speed per avr-libc FAQ
-## CFLAGS = -Os -mcall-prologues -g3 -std=gnu99 -Wall -Werror -Wundef
+# Use below to optimize size
+#CFLAGS = -Os -g -std=gnu99 -Wall
 ## Use short (8-bit) data types 
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums 
 ## Splits up object files per function
@@ -116,6 +116,9 @@ all_clean:
 
 LIB_clean:
 	rm -f $(LIBDIR)/*.o
+
+end_ide:
+	pkill -2 Bloom && sleep 2
 
 ##########------------------------------------------------------##########
 ##########              Programmer-specific details             ##########

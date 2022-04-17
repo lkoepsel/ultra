@@ -7,7 +7,7 @@
 
 #include <stdbool.h>
 #include "main.h"
-#include "frequency.h"
+#include "clocks.h"
 
 void state1() ;
 #endif

@@ -17,3 +17,6 @@ build
 *.map
 *~
 *.eeprom
+.pdf
+.numbers
+docs/*

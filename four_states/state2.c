@@ -1,11 +1,13 @@
 #include "state2.h"
 
-void state2() {
+void state2() 
+{
     digitalWrite(LED_BIT0, LOW);
     digitalWrite(LED_BIT1, HIGH);
     uint8_t unpressed = 1;
 
-    while(unpressed) {
+    while(unpressed) 
+    {
         // Up Button
         if (buttons[UP].pressed) {
             state = 3;
@@ -13,17 +15,29 @@ void state2() {
             printf("State2: Up pressed, state = %d\n", state);
         }
         // Enter Button
-        if (buttons[ENTER].pressed) {
+        if (buttons[ENTER].pressed) 
+        {
             printf("In Enter State 2, state = %d\n", state);
 
             blue_led(MEDIUM);
-            while (true) {
-                uint16_t rand_f = random() % 200;
-                if (rand_f >= 80) { 
-                    uint16_t rand_t = 500 + random() % 2000;
-                    printf("%u | %u ", rand_f, rand_t);
-                    sound(rand_f);
-                    delay(rand_t);
+            while (unpressed) 
+            {
+                uint16_t rand_freq = random() % 200;
+                if (rand_freq >= 80) 
+                { 
+                    uint16_t rand_time = 500 + random() % 2000;
+                    printf("%u | %u ", rand_freq, rand_time);
+                    uint16_t pre_millis = millis();
+                    sound(rand_freq);
+                    while (unpressed && (millis() - pre_millis < rand_time)) 
+                    {
+                        if (buttons[UP].pressed) 
+                        {
+                            unpressed = false;
+                            printf("UP pressed");
+                            state = 3;
+                        }
+                    }
                 }
             }
         }

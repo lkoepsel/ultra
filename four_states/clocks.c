@@ -27,6 +27,14 @@ ISR (TIMER2_COMPA_vect)
     }
 }
 
+uint16_t millis() {
+    ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+    {
+        return(sys_ctr_2);
+    }
+    return 0;   
+}
+
 void blue_led(uint8_t intensity) {
 
     // Uses T/C 0 to drive BLUE LED, indicates sound (audible/ultra 1/ultra 2)

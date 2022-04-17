@@ -3,26 +3,35 @@
 void state1() {
     digitalWrite(LED_BIT0, HIGH);
     digitalWrite(LED_BIT1, LOW);
-    uint8_t unpressed = 1;
+    bool unpressed = true;
 
     while(unpressed) {
         // Up Button
         if (buttons[UP].pressed) {
             state = 2;
-            unpressed = 0;
+            unpressed = false;
             printf("State1: Up pressed, state = %d\n", state);
         }
         // Enter Button
         if (buttons[ENTER].pressed) {
-            printf("In Enter State 1, state = %d\n", state);
-
+            printf("In Enter State 1 pre, state = %d\n", state);
+            unpressed = true;
             blue_led(DIM);
-            while (true) {
-                uint16_t rand_f = random() % 4000;
-                uint16_t rand_t = 500 + random() % 2000;
-                printf("%u | %u ", rand_f, rand_t);
-                sound(rand_f);
-                delay(rand_t);
+            while (unpressed) {
+                uint16_t rand_freq = random() % 4000;
+                uint16_t rand_time = 500 + random() % 2000;
+                printf("%u | %u ", rand_freq, rand_time);
+                uint16_t pre_millis = millis();
+                sound(rand_freq);
+                while (unpressed && (millis() - pre_millis < rand_time)) 
+                {
+                    if (buttons[UP].pressed) 
+                    {
+                        unpressed = false;
+                        printf("UP pressed");
+                        state = 2;
+                    }
+                }
             }
             printf("\n");
         }
